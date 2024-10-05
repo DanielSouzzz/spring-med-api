@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  postgres-docker:
+    image: postgres:17
+    container_name: bd-postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=medapi
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+      - ./data/postgres:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+
+  redis:
+    image: redis:7.2.2
+    container_name: redis-server
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis:/data
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
