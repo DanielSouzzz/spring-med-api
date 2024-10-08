@@ -1,4 +1,4 @@
-package app.springmedapi.model.dto;
+package app.springmedapi.entity.dto;
 
 import app.springmedapi.enums.Especialidade;
 

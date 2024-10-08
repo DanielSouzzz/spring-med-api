@@ -1,21 +1,26 @@
 package app.springmedapi.controller;
 
-import app.springmedapi.model.dto.DadosMedicoDTO;
-import app.springmedapi.repository.MedicoRepository;
+import app.springmedapi.entity.Medico;
+import app.springmedapi.service.MedicoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/medicos")
 public class MedicoController {
-    private final MedicoRepository repository;
+    private final MedicoService medicoService;
 
-    public MedicoController(MedicoRepository repository) {
-        this.repository = repository;
+    public MedicoController(MedicoService medicoService) {
+        this.medicoService = medicoService;
     }
 
     @PostMapping
-    public void cadastrar(@RequestBody DadosMedicoDTO dados){
-        System.out.println("hello");
+    public ResponseEntity<Medico> cadastrarMedico(@RequestBody Medico medico) {
+        Medico medicoSalvo = medicoService.createDoctor(medico);
+        return ResponseEntity.ok(medicoSalvo);
     }
 }

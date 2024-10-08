@@ -1,4 +1,4 @@
-package app.springmedapi.model;
+package app.springmedapi.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
