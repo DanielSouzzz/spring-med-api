@@ -1,19 +1,21 @@
 package app.springmedapi.controller;
 
-import app.springmedapi.medico.DadosCadastroMedico;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import app.springmedapi.model.dto.DadosMedicoDTO;
+import app.springmedapi.repository.MedicoRepository;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.Reader;
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/medicos")
 public class MedicoController {
+    private final MedicoRepository repository;
+
+    public MedicoController(MedicoRepository repository) {
+        this.repository = repository;
+    }
 
     @PostMapping
-    public void cadastrar(@RequestBody DadosCadastroMedico dados){
-        System.out.println(dados);
+    public void cadastrar(@RequestBody DadosMedicoDTO dados){
+        System.out.println("hello");
     }
 }

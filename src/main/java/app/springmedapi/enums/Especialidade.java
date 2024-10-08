@@ -1,4 +1,4 @@
-package app.springmedapi.medico;
+package app.springmedapi.enums;
 
 public enum Especialidade {
     ORTOPEDIA,
