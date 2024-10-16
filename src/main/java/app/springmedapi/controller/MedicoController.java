@@ -1,12 +1,10 @@
 package app.springmedapi.controller;
 
-import app.springmedapi.entity.Medico;
+import app.springmedapi.entity.dto.MedicoDTO;
 import app.springmedapi.service.MedicoService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
 
 @CrossOrigin("*")
 @RestController
@@ -19,8 +17,8 @@ public class MedicoController {
     }
 
     @PostMapping
-    public ResponseEntity<Medico> cadastrarMedico(@RequestBody Medico medico) {
-        Medico medicoSalvo = medicoService.createDoctor(medico);
+    public ResponseEntity<MedicoDTO> cadastrarMedico(@RequestBody @Valid MedicoDTO medico) {
+        MedicoDTO medicoSalvo = medicoService.createDoctor(medico);
         return ResponseEntity.ok(medicoSalvo);
     }
 }
