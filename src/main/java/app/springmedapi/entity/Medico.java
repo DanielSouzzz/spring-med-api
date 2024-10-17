@@ -26,4 +26,17 @@ public class Medico {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
+
+    @Override
+    public String toString() {
+        return "Medico{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", crm='" + crm + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", especialidade=" + especialidade +
+                ", endereco=" + endereco +
+                '}';
+    }
 }

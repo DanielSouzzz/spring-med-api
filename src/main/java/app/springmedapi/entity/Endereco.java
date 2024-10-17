@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Table(name = "enderecos")
 @Entity(name = "enderecos")
 @Getter
@@ -14,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Endereco {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     private String logradouro;
     private int numero;
@@ -26,4 +28,18 @@ public class Endereco {
 
     @OneToMany(mappedBy = "endereco")
     private List<Medico> medicos;
+
+    @Override
+    public String toString() {
+        return "Endereco{" +
+                "id=" + id +
+                ", logradouro='" + logradouro + '\'' +
+                ", numero=" + numero +
+                ", complemento='" + complemento + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", uf='" + uf + '\'' +
+                ", cep='" + cep + '\'' +
+                '}';
+    }
 }

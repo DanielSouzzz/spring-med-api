@@ -5,17 +5,14 @@ import app.springmedapi.entity.Medico;
 import app.springmedapi.entity.dto.EnderecoDTO;
 import app.springmedapi.entity.dto.MedicoDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface MedicoMapper {
-    MedicoMapper INSTANCE = Mappers.getMapper(MedicoMapper.class);
+    MedicoDTO toMedicoDTO(Medico medico);
 
-    Medico toEntity(MedicoDTO dto);
+    Medico toMedico(MedicoDTO medicoDTO);
 
-    MedicoDTO toDto(Medico medico);
+    EnderecoDTO toEnderecoDTO(Endereco endereco);
 
-    Endereco toEntity(EnderecoDTO enderecoDTO);
-
-    EnderecoDTO toDto(Endereco endereco);
+    Endereco toEndereco(EnderecoDTO enderecoDTO);
 }

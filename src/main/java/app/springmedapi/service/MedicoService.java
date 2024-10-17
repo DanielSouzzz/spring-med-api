@@ -10,17 +10,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class MedicoService {
     private final MedicoRepository medicoRepository;
-    private final MedicoMapper medicoMapper = MedicoMapper.INSTANCE;
+    private final MedicoMapper medicoMapper;
 
-    public MedicoService(MedicoRepository medicoRepository) {
+    public MedicoService(MedicoRepository medicoRepository, MedicoMapper medicoMapper) {
         this.medicoRepository = medicoRepository;
+        this.medicoMapper = medicoMapper;
     }
 
     @Transactional
     public MedicoDTO createDoctor(MedicoDTO medicoDTO){
-        Medico medico = medicoMapper.toEntity(medicoDTO);
+    Medico medico = medicoMapper.toMedico(medicoDTO);
+        System.out.println(medico);
+    medico = medicoRepository.save(medico);
 
-        Medico medicoSalvo = medicoRepository.save(medico);
-        return medicoMapper.toDto(medicoSalvo);
+    return medicoMapper.toMedicoDTO(medico);
     }
 }
