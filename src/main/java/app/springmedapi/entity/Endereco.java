@@ -4,14 +4,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Table(name = "enderecos")
 @Entity(name = "enderecos")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Endereco {

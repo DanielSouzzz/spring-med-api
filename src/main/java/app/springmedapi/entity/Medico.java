@@ -23,8 +23,8 @@ public class Medico {
     private Especialidade especialidade;
 
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "endereco_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id", nullable = true)
     private Endereco endereco;
 
     @Override
