@@ -1,10 +1,13 @@
 package app.springmedapi.service;
 
 import app.springmedapi.entity.Medico;
+import app.springmedapi.entity.dto.ListagemMedicoDTO;
 import app.springmedapi.entity.dto.MedicoDTO;
 import app.springmedapi.mapper.MedicoMapper;
 import app.springmedapi.repository.MedicoRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,9 +23,13 @@ public class MedicoService {
     @Transactional
     public MedicoDTO createDoctor(MedicoDTO medicoDTO){
     Medico medico = medicoMapper.toMedico(medicoDTO);
-        System.out.println(medico);
     medico = medicoRepository.save(medico);
 
     return medicoMapper.toMedicoDTO(medico);
+    }
+
+    public Page<ListagemMedicoDTO> listarMedicos(Pageable pageable) {
+        Page<Medico> medicos = medicoRepository.findAll(pageable);
+        return medicos.map(medicoMapper::toListagemMedicoDTO);
     }
 }
