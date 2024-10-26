@@ -29,7 +29,7 @@ public class MedicoController {
 
     @GetMapping
     public ResponseEntity<Page<ListagemMedicoDTO>> listarMedicos(
-            @PageableDefault(size = 10, sort = "nome", direction = Sort.Direction.ASC) Pageable pageable) {
+            @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable pageable) {
         Page<ListagemMedicoDTO> medicos = medicoService.listarMedicos(pageable);
         return ResponseEntity.ok(medicos);
     }
