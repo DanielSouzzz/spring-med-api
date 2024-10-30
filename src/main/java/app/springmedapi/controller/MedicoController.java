@@ -1,7 +1,8 @@
 package app.springmedapi.controller;
 
-import app.springmedapi.entity.dto.ListagemMedicoDTO;
-import app.springmedapi.entity.dto.MedicoDTO;
+import app.springmedapi.entity.dto.AtualizarMeditoDTO;
+import app.springmedapi.entity.dto.ListarMedicoDTO;
+import app.springmedapi.entity.dto.CadastrarMedicoDTO;
 import app.springmedapi.service.MedicoService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -22,15 +23,20 @@ public class MedicoController {
     }
 
     @PostMapping
-    public ResponseEntity<MedicoDTO> cadastrarMedico(@RequestBody @Valid MedicoDTO medico) {
-        MedicoDTO medicoSalvo = medicoService.createDoctor(medico);
+    public ResponseEntity<CadastrarMedicoDTO> cadastrarMedico(@RequestBody @Valid CadastrarMedicoDTO medico) {
+        CadastrarMedicoDTO medicoSalvo = medicoService.createDoctor(medico);
         return ResponseEntity.ok(medicoSalvo);
     }
 
     @GetMapping
-    public ResponseEntity<Page<ListagemMedicoDTO>> listarMedicos(
+    public ResponseEntity<Page<ListarMedicoDTO>> listarMedicos(
             @PageableDefault(size = 10, sort = {"nome"}, direction = Sort.Direction.ASC) Pageable pageable) {
-        Page<ListagemMedicoDTO> medicos = medicoService.listarMedicos(pageable);
+        Page<ListarMedicoDTO> medicos = medicoService.listarMedicos(pageable);
         return ResponseEntity.ok(medicos);
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<AtualizarMeditoDTO> atualizarMedico(@PathVariable Long id, @RequestBody @Valid AtualizarMeditoDTO medico) {
+        AtualizarMeditoDTO medicoAtualizado = medicoService.atualizarMedico(id, medico);
+        return ResponseEntity.ok(medicoAtualizado);
     }
 }
