@@ -34,9 +34,8 @@ public class MedicoController {
         Page<ListarMedicoDTO> medicos = medicoService.listarMedicos(pageable);
         return ResponseEntity.ok(medicos);
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<AtualizarMeditoDTO> atualizarMedico(@PathVariable Long id, @RequestBody @Valid AtualizarMeditoDTO medico) {
-        AtualizarMeditoDTO medicoAtualizado = medicoService.atualizarMedico(id, medico);
-        return ResponseEntity.ok(medicoAtualizado);
+    @PutMapping
+    public ResponseEntity<AtualizarMeditoDTO> atualizarMedico(@RequestBody @Valid AtualizarMeditoDTO medico) {
+        return ResponseEntity.status(201).body(medicoService.atualizarMedico(medico));
     }
 }

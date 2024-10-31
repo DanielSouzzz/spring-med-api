@@ -1,8 +1,9 @@
 package app.springmedapi.service;
 
 import app.springmedapi.entity.Medico;
-import app.springmedapi.entity.dto.ListagemMedicoDTO;
-import app.springmedapi.entity.dto.MedicoDTO;
+import app.springmedapi.entity.dto.AtualizarMeditoDTO;
+import app.springmedapi.entity.dto.ListarMedicoDTO;
+import app.springmedapi.entity.dto.CadastrarMedicoDTO;
 import app.springmedapi.mapper.MedicoMapper;
 import app.springmedapi.repository.MedicoRepository;
 import jakarta.transaction.Transactional;
@@ -21,15 +22,32 @@ public class MedicoService {
     }
 
     @Transactional
-    public MedicoDTO createDoctor(MedicoDTO medicoDTO){
+    public CadastrarMedicoDTO createDoctor(CadastrarMedicoDTO medicoDTO){
     Medico medico = medicoMapper.toMedico(medicoDTO);
     medico = medicoRepository.save(medico);
 
     return medicoMapper.toMedicoDTO(medico);
     }
 
-    public Page<ListagemMedicoDTO> listarMedicos(Pageable pageable) {
+    public Page<ListarMedicoDTO> listarMedicos(Pageable pageable) {
         Page<Medico> medicos = medicoRepository.findAll(pageable);
         return medicos.map(medicoMapper::toListagemMedicoDTO);
     }
+    @Transactional
+    public AtualizarMeditoDTO atualizarMedico(AtualizarMeditoDTO atualizaMeditoDTO){
+        if (atualizaMeditoDTO.id() == null){
+            throw new IllegalArgumentException("Id do médico não pode ser nulo");
+        }
+        Medico medico = medicoRepository.findById(atualizaMeditoDTO.id())
+                .orElseThrow(() -> new IllegalArgumentException("Médico não encontrado"));
+        if (atualizaMeditoDTO.nome() != null){
+            medico.setNome(atualizaMeditoDTO.nome());
+        }
+        if (atualizaMeditoDTO.telefone() != null) {
+            medico.setTelefone(atualizaMeditoDTO.telefone());
+        }
+        medico = medicoRepository.save(medico);
+        return medicoMapper.toAtualizarMedicoDTO(medico);
+    }
 }
+
