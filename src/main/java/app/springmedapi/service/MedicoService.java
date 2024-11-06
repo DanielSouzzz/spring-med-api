@@ -44,41 +44,18 @@ public class MedicoService {
         }
         Medico medico = medicoRepository.findById(atualizaMeditoDTO.id())
                 .orElseThrow(() -> new IllegalArgumentException("Médico não encontrado"));
-        if (atualizaMeditoDTO.nome() != null){
-            medico.setNome(atualizaMeditoDTO.nome());
-        }
-        if (atualizaMeditoDTO.telefone() != null) {
-            medico.setTelefone(atualizaMeditoDTO.telefone());
-        }
-        if (atualizaMeditoDTO.endereco() != null){
-            Endereco enderecoExistente = medico.getEndereco();
 
-            if (enderecoExistente != null){
-                if (atualizaMeditoDTO.endereco().logradouro() != null){
+            medico.setNome(atualizaMeditoDTO.nome());
+            medico.setTelefone(atualizaMeditoDTO.telefone());
+
+            Endereco enderecoExistente = medico.getEndereco();
                     enderecoExistente.setLogradouro(atualizaMeditoDTO.endereco().logradouro());
-                }
-                if (atualizaMeditoDTO.endereco().numero() != 0){
                     enderecoExistente.setNumero(atualizaMeditoDTO.endereco().numero());
-                }
-                if (atualizaMeditoDTO.endereco().complemento() != null){
                     enderecoExistente.setComplemento(atualizaMeditoDTO.endereco().complemento());
-                }
-                if (atualizaMeditoDTO.endereco().bairro() != null){
                     enderecoExistente.setBairro(atualizaMeditoDTO.endereco().bairro());
-                }
-                if (atualizaMeditoDTO.endereco().cidade() != null){
                     enderecoExistente.setCidade(atualizaMeditoDTO.endereco().cidade());
-                }
-                if (atualizaMeditoDTO.endereco().uf() != null){
                     enderecoExistente.setUf(atualizaMeditoDTO.endereco().uf());
-                }
-                if (atualizaMeditoDTO.endereco().cep() != null){
                     enderecoExistente.setCep(atualizaMeditoDTO.endereco().cep());
-                }else {
-                    throw new IllegalArgumentException("Endereço nulo ou nao encontrado");
-                }
-            }
-        }
         medico = medicoRepository.save(medico);
         return medicoMapper.toAtualizarMedicoDTO(medico);
     }
