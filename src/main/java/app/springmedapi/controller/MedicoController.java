@@ -38,4 +38,11 @@ public class MedicoController {
     public ResponseEntity<AtualizarMeditoDTO> atualizarMedico(@RequestBody @Valid AtualizarMeditoDTO medico) {
         return ResponseEntity.status(201).body(medicoService.atualizarMedico(medico));
     }
+
+    @DeleteMapping("/{id}")
+    public void deletarMedico(@PathVariable Long id) {
+        medicoService.deletarMedico(id);
+    }
+
+
 }

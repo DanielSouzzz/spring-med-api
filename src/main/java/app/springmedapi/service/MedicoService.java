@@ -59,5 +59,9 @@ public class MedicoService {
         medico = medicoRepository.save(medico);
         return medicoMapper.toAtualizarMedicoDTO(medico);
     }
+
+    public void deletarMedico(Long id) {
+        medicoRepository.deleteById(id);
+    }
 }
 
