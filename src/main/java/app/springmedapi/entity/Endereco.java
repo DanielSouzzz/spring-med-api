@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Endereco {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "endereco_id")
     private Long id;
 
     private String logradouro;

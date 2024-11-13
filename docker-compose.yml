@@ -16,6 +16,23 @@ services:
     networks:
       - app-network
 
+  flyway:
+    image: flyway/flyway:9.6
+    container_name: flyway
+    depends_on:
+      - postgres-docker
+    environment:
+      FLYWAY_URL: jdbc:postgresql://postgres-docker:5432/medapi
+      FLYWAY_USER: postgres
+      FLYWAY_PASSWORD: root
+      FLYWAY_SCHEMAS: public
+      FLYWAY_LOCATIONS: filesystem:/flyway/sql
+    volumes:
+      - ./src/main/resources/db/migration:/flyway/sql
+    networks:
+      - app-network
+    command: -baselineOnMigrate=true migrate
+
   redis:
     image: redis:7.2.2
     container_name: redis-server
