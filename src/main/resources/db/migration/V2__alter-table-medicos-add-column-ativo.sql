@@ -1,0 +1,3 @@
+ALTER TABLE medicos ADD COLUMN active BOOLEAN;
+UPDATE medicos SET active = TRUE;
+ALTER TABLE medicos ALTER COLUMN active SET NOT NULL;
