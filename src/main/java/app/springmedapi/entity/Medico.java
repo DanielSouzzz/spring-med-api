@@ -18,6 +18,8 @@ public class Medico {
     private String email;
     private String crm;
     private String telefone;
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT true")
+    private Boolean ativo = true;
 
     @Enumerated(EnumType.STRING)
     private Especialidade especialidade;

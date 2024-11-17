@@ -11,6 +11,7 @@ public record AtualizarMeditoDTO(
         String nome,
         @NotBlank(message = "O telefone é obrigatório")
         String telefone,
+        @NotNull(message = "O endereço é obrigatório")
         @Valid
         EnderecoDTO endereco) {
 }
