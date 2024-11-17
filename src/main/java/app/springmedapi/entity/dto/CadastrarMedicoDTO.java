@@ -21,6 +21,7 @@ public record CadastrarMedicoDTO(
         String crm,
         @NotNull(message = "A especialidade é obrigatória.")
         Especialidade especialidade,
+        @NotNull(message = "O campo de ativo é obrigatório.") // TODO: Verificar se é necessário
         Boolean ativo,
         @NotNull(message = "O endereço é obrigatório.")
         @Valid
