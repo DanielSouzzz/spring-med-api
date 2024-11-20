@@ -34,7 +34,7 @@ public class MedicoService {
     }
 
     public Page<ListarMedicoDTO> listarMedicos(Pageable pageable) {
-        Page<Medico> medicos = medicoRepository.findAll(pageable);
+        Page<Medico> medicos = medicoRepository.findAllByAtivoTrue(pageable);
         return medicos.map(medicoMapper::toListagemMedicoDTO);
     }
     @Transactional
