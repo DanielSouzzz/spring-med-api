@@ -61,7 +61,10 @@ public class MedicoService {
     }
 
     public void deletarMedico(Long id) {
-        medicoRepository.deleteById(id);
+        Medico medico = medicoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Médico não encontrado"));
+        medico.setAtivo(false);
+        medicoRepository.save(medico);
     }
 }
 

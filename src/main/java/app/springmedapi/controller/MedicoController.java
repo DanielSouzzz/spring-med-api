@@ -40,8 +40,9 @@ public class MedicoController {
     }
 
     @DeleteMapping("/{id}")
-    public void deletarMedico(@PathVariable Long id) {
+    public ResponseEntity<Void> excluirMedico(@PathVariable Long id) {
         medicoService.deletarMedico(id);
+        return ResponseEntity.noContent().build();
     }
 
 
