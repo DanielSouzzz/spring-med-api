@@ -60,6 +60,7 @@ public class MedicoService {
         return medicoMapper.toAtualizarMedicoDTO(medico);
     }
 
+    @Transactional
     public void deletarMedico(Long id) {
         Medico medico = medicoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Médico não encontrado"));
