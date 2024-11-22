@@ -3,6 +3,7 @@ package app.springmedapi.service;
 import app.springmedapi.entity.Endereco;
 import app.springmedapi.entity.Medico;
 import app.springmedapi.entity.dto.AtualizarMeditoDTO;
+import app.springmedapi.entity.dto.DadosDetalhamentoMedicoDTO;
 import app.springmedapi.entity.dto.ListarMedicoDTO;
 import app.springmedapi.entity.dto.CadastrarMedicoDTO;
 import app.springmedapi.mapper.EnderecoMapper;
@@ -38,7 +39,7 @@ public class MedicoService {
         return medicos.map(medicoMapper::toListagemMedicoDTO);
     }
     @Transactional
-    public AtualizarMeditoDTO atualizarMedico(AtualizarMeditoDTO atualizaMeditoDTO){
+    public DadosDetalhamentoMedicoDTO atualizarMedico(Long id, AtualizarMeditoDTO atualizaMeditoDTO){
         if (atualizaMeditoDTO.id() == null){
             throw new IllegalArgumentException("Id do médico não pode ser nulo");
         }
@@ -57,7 +58,7 @@ public class MedicoService {
                     enderecoExistente.setUf(atualizaMeditoDTO.endereco().uf());
                     enderecoExistente.setCep(atualizaMeditoDTO.endereco().cep());
         medico = medicoRepository.save(medico);
-        return medicoMapper.toAtualizarMedicoDTO(medico);
+        return medicoMapper.toDetalhamentoMedicoDTO(medico);
     }
 
     @Transactional

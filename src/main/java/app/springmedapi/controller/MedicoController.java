@@ -1,6 +1,7 @@
 package app.springmedapi.controller;
 
 import app.springmedapi.entity.dto.AtualizarMeditoDTO;
+import app.springmedapi.entity.dto.DadosDetalhamentoMedicoDTO;
 import app.springmedapi.entity.dto.ListarMedicoDTO;
 import app.springmedapi.entity.dto.CadastrarMedicoDTO;
 import app.springmedapi.service.MedicoService;
@@ -35,8 +36,9 @@ public class MedicoController {
         return ResponseEntity.ok(medicos);
     }
     @PutMapping
-    public ResponseEntity<AtualizarMeditoDTO> atualizarMedico(@RequestBody @Valid AtualizarMeditoDTO medico) {
-        return ResponseEntity.status(201).body(medicoService.atualizarMedico(medico));
+    public ResponseEntity<DadosDetalhamentoMedicoDTO> atualizarMedico(@RequestBody @Valid AtualizarMeditoDTO medico) {
+        DadosDetalhamentoMedicoDTO response = medicoService.atualizarMedico(medico.id(), medico);
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
