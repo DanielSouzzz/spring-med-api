@@ -37,7 +37,7 @@ public class MedicoController {
     }
     @PutMapping
     public ResponseEntity<DadosDetalhamentoMedicoDTO> atualizarMedico(@RequestBody @Valid AtualizarMeditoDTO medico) {
-        DadosDetalhamentoMedicoDTO response = medicoService.atualizarMedico(medico.id(), medico);
+        DadosDetalhamentoMedicoDTO response = medicoService.atualizarMedico(medico);
         return ResponseEntity.ok(response);
     }
 

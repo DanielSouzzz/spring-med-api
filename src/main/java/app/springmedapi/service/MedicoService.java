@@ -39,7 +39,7 @@ public class MedicoService {
         return medicos.map(medicoMapper::toListagemMedicoDTO);
     }
     @Transactional
-    public DadosDetalhamentoMedicoDTO atualizarMedico(Long id, AtualizarMeditoDTO atualizaMeditoDTO){
+    public DadosDetalhamentoMedicoDTO atualizarMedico(AtualizarMeditoDTO atualizaMeditoDTO){
         if (atualizaMeditoDTO.id() == null){
             throw new IllegalArgumentException("Id do médico não pode ser nulo");
         }
