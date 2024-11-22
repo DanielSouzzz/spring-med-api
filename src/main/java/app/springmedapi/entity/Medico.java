@@ -29,6 +29,14 @@ public class Medico {
     @JoinColumn(name = "endereco_id", nullable = true)
     private Endereco endereco;
 
+    public Medico(String nome, String email, String crm, String telefone, Especialidade especialidade, Endereco endereco) {
+        this.nome = nome;
+        this.email = email;
+        this.crm = crm;
+        this.telefone = telefone;
+        this.especialidade = especialidade;
+        this.endereco = endereco;
+    }
     @Override
     public String toString() {
         return "Medico{" +
