@@ -12,6 +12,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @CrossOrigin("*")
 @RestController
@@ -24,9 +26,12 @@ public class MedicoController {
     }
 
     @PostMapping
-    public ResponseEntity<CadastrarMedicoDTO> cadastrarMedico(@RequestBody @Valid CadastrarMedicoDTO medico) {
-        CadastrarMedicoDTO medicoSalvo = medicoService.createDoctor(medico);
-        return ResponseEntity.ok(medicoSalvo);
+    public ResponseEntity<DadosDetalhamentoMedicoDTO> cadastrarMedico(@RequestBody @Valid CadastrarMedicoDTO medico, UriComponentsBuilder uriBuilder) {
+        DadosDetalhamentoMedicoDTO MedicoSalvo = medicoService.createDoctor(medico);
+
+        UriComponents uri = uriBuilder.path("/medicos/{id}").buildAndExpand(MedicoSalvo.id());
+
+        return ResponseEntity.created(uri.toUri()).body(MedicoSalvo);
     }
 
     @GetMapping

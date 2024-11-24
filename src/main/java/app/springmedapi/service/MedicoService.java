@@ -27,11 +27,11 @@ public class MedicoService {
     }
 
     @Transactional
-    public CadastrarMedicoDTO createDoctor(CadastrarMedicoDTO medicoDTO){
-    Medico medico = medicoMapper.toMedico(medicoDTO);
-    medico = medicoRepository.save(medico);
+    public DadosDetalhamentoMedicoDTO createDoctor(CadastrarMedicoDTO medicoDTO){
+        Medico medico = medicoMapper.toMedico(medicoDTO);
+        medico = medicoRepository.save(medico);
 
-    return medicoMapper.toMedicoDTO(medico);
+        return medicoMapper.toDetalhamentoMedicoDTO(medico);
     }
 
     public Page<ListarMedicoDTO> listarMedicos(Pageable pageable) {
@@ -46,17 +46,17 @@ public class MedicoService {
         Medico medico = medicoRepository.findById(atualizaMeditoDTO.id())
                 .orElseThrow(() -> new IllegalArgumentException("Médico não encontrado"));
 
-            medico.setNome(atualizaMeditoDTO.nome());
-            medico.setTelefone(atualizaMeditoDTO.telefone());
+        medico.setNome(atualizaMeditoDTO.nome());
+        medico.setTelefone(atualizaMeditoDTO.telefone());
 
-            Endereco enderecoExistente = medico.getEndereco();
-                    enderecoExistente.setLogradouro(atualizaMeditoDTO.endereco().logradouro());
-                    enderecoExistente.setNumero(atualizaMeditoDTO.endereco().numero());
-                    enderecoExistente.setComplemento(atualizaMeditoDTO.endereco().complemento());
-                    enderecoExistente.setBairro(atualizaMeditoDTO.endereco().bairro());
-                    enderecoExistente.setCidade(atualizaMeditoDTO.endereco().cidade());
-                    enderecoExistente.setUf(atualizaMeditoDTO.endereco().uf());
-                    enderecoExistente.setCep(atualizaMeditoDTO.endereco().cep());
+        Endereco enderecoExistente = medico.getEndereco();
+        enderecoExistente.setLogradouro(atualizaMeditoDTO.endereco().logradouro());
+        enderecoExistente.setNumero(atualizaMeditoDTO.endereco().numero());
+        enderecoExistente.setComplemento(atualizaMeditoDTO.endereco().complemento());
+        enderecoExistente.setBairro(atualizaMeditoDTO.endereco().bairro());
+        enderecoExistente.setCidade(atualizaMeditoDTO.endereco().cidade());
+        enderecoExistente.setUf(atualizaMeditoDTO.endereco().uf());
+        enderecoExistente.setCep(atualizaMeditoDTO.endereco().cep());
         medico = medicoRepository.save(medico);
         return medicoMapper.toDetalhamentoMedicoDTO(medico);
     }
