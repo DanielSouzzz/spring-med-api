@@ -6,9 +6,11 @@ import app.springmedapi.entity.dto.AtualizarMeditoDTO;
 import app.springmedapi.entity.dto.DadosDetalhamentoMedicoDTO;
 import app.springmedapi.entity.dto.ListarMedicoDTO;
 import app.springmedapi.entity.dto.CadastrarMedicoDTO;
+import app.springmedapi.infra.GlobalExceptionHandler;
 import app.springmedapi.mapper.EnderecoMapper;
 import app.springmedapi.mapper.MedicoMapper;
 import app.springmedapi.repository.MedicoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -71,7 +73,7 @@ public class MedicoService {
 
     public DadosDetalhamentoMedicoDTO detalharMedico(Long id) {
         Medico medico = medicoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Médico não encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Médico não encontrado com ID: " + id));
         return medicoMapper.toDetalhamentoMedicoDTO(medico);
     }
 }
