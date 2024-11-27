@@ -5,6 +5,7 @@ import app.springmedapi.entity.dto.DadosDetalhamentoMedicoDTO;
 import app.springmedapi.entity.dto.ListarMedicoDTO;
 import app.springmedapi.entity.dto.CadastrarMedicoDTO;
 import app.springmedapi.service.MedicoService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,5 +51,11 @@ public class MedicoController {
     public ResponseEntity<Void> excluirMedico(@PathVariable Long id) {
         medicoService.deletarMedico(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<DadosDetalhamentoMedicoDTO> detalharMedico(@PathVariable Long id){
+        DadosDetalhamentoMedicoDTO medico = medicoService.detalharMedico(id);
+        return ResponseEntity.ok(medico);
     }
 }

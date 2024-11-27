@@ -68,5 +68,11 @@ public class MedicoService {
         medico.setAtivo(false);
         medicoRepository.save(medico);
     }
+
+    public DadosDetalhamentoMedicoDTO detalharMedico(Long id) {
+        Medico medico = medicoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Médico não encontrado"));
+        return medicoMapper.toDetalhamentoMedicoDTO(medico);
+    }
 }
 
