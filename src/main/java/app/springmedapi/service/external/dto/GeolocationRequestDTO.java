@@ -1,4 +1,4 @@
 package app.springmedapi.service.external.dto;
 
-public record GeolocationRequestDTO(double lat, double lng) {
+public record GeolocationRequestDTO(double lat, double lng, int confidence) {
 }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Objects;
+
 @Component
 public class OpenCageClient {
     private final RestTemplate restTemplate;
@@ -20,11 +22,19 @@ public class OpenCageClient {
         String url = String.format("https://api.opencagedata.com/geocode/v1/json?q=%s&key=%s", address, apiKey);
 
         JsonNode response = restTemplate.getForObject(url, JsonNode.class);
-        JsonNode firstResult = response.get("results").get(0).get("geometry");
+        if (Objects.requireNonNull(response).hasNonNull("results")) {
+            JsonNode firstResult = response.get("results").get(0);
 
-        double lat = firstResult.get("lat").asDouble();
-        double lng = firstResult.get("lng").asDouble();
+            int confidence = firstResult.get("confidence").asInt();
+            double lat = firstResult.get("geometry").get("lat").asDouble();
+            double lng = firstResult.get("geometry").get("lng").asDouble();
 
-        return new GeolocationResultDTO(lat, lng);
+            if (confidence < 5) {
+                throw new RuntimeException("Confidence level too low");
+            }
+            return new GeolocationResultDTO(lat, lng, confidence);
+
+        }
+         throw new RuntimeException();
     }
 }
