@@ -1,5 +1,5 @@
+import app.springmedapi.service.GeolocationService;
 import app.springmedapi.service.external.OpenCageClient;
-import app.springmedapi.service.external.dto.GeolocationResultDTO;
 import org.springframework.web.client.RestTemplate;
 
 public class OpenCageClientTest {
@@ -10,7 +10,8 @@ public class OpenCageClientTest {
 
         String address = "Rua+Joao+Gualberto+de+Oliveira,+17,+Sao+Jose,+SC,+Brasil";
 
-        GeolocationResultDTO result = openCageClient.fetchCoordinates(address);
+        GeolocationService geolocationService = new GeolocationService(openCageClient);
+        double[] result = geolocationService.fetchCoordinates(address);
         System.out.println(result);
     }
 }

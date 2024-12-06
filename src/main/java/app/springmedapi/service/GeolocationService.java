@@ -1,5 +1,8 @@
 package app.springmedapi.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import app.springmedapi.service.external.OpenCageClient;
 import app.springmedapi.service.external.dto.GeolocationResultDTO;
 import org.springframework.stereotype.Service;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GeolocationService {
     private final OpenCageClient openCageClient;
+    private final Logger logger = LoggerFactory.getLogger(GeolocationService.class);
 
     public GeolocationService(OpenCageClient openCageClient) {
         this.openCageClient = openCageClient;
@@ -20,6 +24,7 @@ public class GeolocationService {
         if (geolocationResultDTO.confidence() < 5) {
             throw new RuntimeException("Could not find coordinates for the given address");
         }
+        logger.info("Coordinates found for address: {}, latitude: {}, longitude: {}", address, geolocationResultDTO.lat(), geolocationResultDTO.lng());
         return new double[]{geolocationResultDTO.lat(), geolocationResultDTO.lng()};
     }
 }
