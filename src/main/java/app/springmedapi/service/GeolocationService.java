@@ -17,6 +17,9 @@ public class GeolocationService {
             throw new IllegalArgumentException("Address cannot be empty");
         }
         GeolocationResultDTO geolocationResultDTO = openCageClient.fetchCoordinates(address);
+        if (geolocationResultDTO.confidence() < 5) {
+            throw new RuntimeException("Could not find coordinates for the given address");
+        }
         return new double[]{geolocationResultDTO.lat(), geolocationResultDTO.lng()};
     }
 }
