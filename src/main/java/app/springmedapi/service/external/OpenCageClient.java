@@ -28,10 +28,6 @@ public class OpenCageClient {
             int confidence = firstResult.get("confidence").asInt();
             double lat = firstResult.get("geometry").get("lat").asDouble();
             double lng = firstResult.get("geometry").get("lng").asDouble();
-
-            if (confidence < 5) {
-                throw new RuntimeException("Confidence level too low");
-            }
             return new GeolocationResultDTO(lat, lng, confidence);
 
         }

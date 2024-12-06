@@ -12,7 +12,11 @@ public class GeolocationService {
         this.openCageClient = openCageClient;
     }
 
-    public GeolocationResultDTO fetchCoordinates(String address) {
-        return openCageClient.fetchCoordinates(address);
+    public double[] fetchCoordinates(String address) {
+        if (address == null || address.isEmpty()) {
+            throw new IllegalArgumentException("Address cannot be empty");
+        }
+        GeolocationResultDTO geolocationResultDTO = openCageClient.fetchCoordinates(address);
+        return new double[]{geolocationResultDTO.lat(), geolocationResultDTO.lng()};
     }
 }
