@@ -5,7 +5,6 @@ import app.springmedapi.entity.dto.DadosDetalhamentoMedicoDTO;
 import app.springmedapi.entity.dto.ListarMedicoDTO;
 import app.springmedapi.entity.dto.CadastrarMedicoDTO;
 import app.springmedapi.service.MedicoService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

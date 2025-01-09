@@ -15,6 +15,7 @@ public class GeolocationService {
     public GeolocationService(OpenCageClient openCageClient) {
         this.openCageClient = openCageClient;
     }
+// TODO: Aguardar desenvolvimento das entidades de consulta e paciente
 
     public double[] fetchCoordinates(String address) {
         if (address == null || address.isEmpty()) {
