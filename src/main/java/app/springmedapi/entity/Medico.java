@@ -4,40 +4,36 @@ import app.springmedapi.enums.Especialidade;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Entity
 @Table(name = "medicos")
-@Entity(name = "Medicos")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
+@ToString(exclude = "endereco")
 public class Medico {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
     private String email;
+
+    @Column(unique = true, nullable = false)
     private String crm;
+
     private String telefone;
+
+    @Column(nullable = false)
     private Boolean ativo = true;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Especialidade especialidade;
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "endereco_id", nullable = true)
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "endereco_id")
     private Endereco endereco;
-
-    @Override
-    public String toString() {
-        return "Medico{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", crm='" + crm + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", especialidade=" + especialidade +
-                ", endereco=" + endereco +
-                '}';
-    }
 }
