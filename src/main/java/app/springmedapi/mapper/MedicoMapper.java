@@ -1,10 +1,10 @@
 package app.springmedapi.mapper;
 
 import app.springmedapi.entity.Medico;
-import app.springmedapi.entity.dto.AtualizarMeditoDTO;
-import app.springmedapi.entity.dto.DadosDetalhamentoMedicoDTO;
-import app.springmedapi.entity.dto.ListarMedicoDTO;
-import app.springmedapi.entity.dto.CadastrarMedicoDTO;
+import app.springmedapi.entity.medicoDTO.AtualizarMeditoDTO;
+import app.springmedapi.entity.medicoDTO.DadosDetalhamentoMedicoDTO;
+import app.springmedapi.entity.medicoDTO.ListarMedicoDTO;
+import app.springmedapi.entity.medicoDTO.CadastrarMedicoDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

@@ -2,11 +2,10 @@ package app.springmedapi.service;
 
 import app.springmedapi.entity.Endereco;
 import app.springmedapi.entity.Medico;
-import app.springmedapi.entity.dto.AtualizarMeditoDTO;
-import app.springmedapi.entity.dto.DadosDetalhamentoMedicoDTO;
-import app.springmedapi.entity.dto.ListarMedicoDTO;
-import app.springmedapi.entity.dto.CadastrarMedicoDTO;
-import app.springmedapi.infra.GlobalExceptionHandler;
+import app.springmedapi.entity.medicoDTO.AtualizarMeditoDTO;
+import app.springmedapi.entity.medicoDTO.DadosDetalhamentoMedicoDTO;
+import app.springmedapi.entity.medicoDTO.ListarMedicoDTO;
+import app.springmedapi.entity.medicoDTO.CadastrarMedicoDTO;
 import app.springmedapi.mapper.EnderecoMapper;
 import app.springmedapi.mapper.MedicoMapper;
 import app.springmedapi.repository.MedicoRepository;
