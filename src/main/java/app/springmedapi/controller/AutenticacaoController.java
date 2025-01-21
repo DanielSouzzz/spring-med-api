@@ -2,7 +2,8 @@ package app.springmedapi.controller;
 
 import app.springmedapi.entity.Usuario;
 import app.springmedapi.entity.usuarioDTO.DadosAutenticacao;
-import app.springmedapi.service.TokenService;
+import app.springmedapi.infra.security.DadosTokenJwtDTO;
+import app.springmedapi.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,9 +26,10 @@ public class AutenticacaoController {
 
     @RequestMapping
     public ResponseEntity autenticar(@RequestBody @Valid DadosAutenticacao dadosAutenticacao) {
-        var token = new UsernamePasswordAuthenticationToken(dadosAutenticacao.login(), dadosAutenticacao.senha());
-        var authenticaon = authenticationManager.authenticate(token);
+        var authenticationTokentoken = new UsernamePasswordAuthenticationToken(dadosAutenticacao.login(), dadosAutenticacao.senha());
+        var authenticaon = authenticationManager.authenticate(authenticationTokentoken);
 
-        return ResponseEntity.ok(tokenService.gerarToken((Usuario) authenticaon.getPrincipal()));
+        var tokenJWT = tokenService.gerarToken((Usuario) authenticaon.getPrincipal());
+        return ResponseEntity.ok(new DadosTokenJwtDTO(tokenJWT));
     }
 }
