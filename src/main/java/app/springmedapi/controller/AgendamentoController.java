@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/consulta")
-public class ConsultaController {
+public class AgendamentoController {
 
     private final AgendamentoService agendamentoService;
 
-    public ConsultaController(AgendamentoService agendamentoService) {
+    public AgendamentoController(AgendamentoService agendamentoService) {
         this.agendamentoService = agendamentoService;
     }
 
