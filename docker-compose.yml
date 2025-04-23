@@ -1,17 +1,17 @@
 version: '3.9'
 
 services:
-  spring-medapi:
-    build: .
-    container_name: restapi-med
-    volumes:
-      - .:/app
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres-docker
-    networks:
-      - app-network
+#  spring-medapi:
+#    build: .
+#    container_name: restapi-med
+#    volumes:
+#      - .:/app
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - postgres-docker
+#    networks:
+#      - app-network
 
   postgres-docker:
     image: postgres:15.8
@@ -24,7 +24,7 @@ services:
       - POSTGRES_PASSWORD=root
       - POSTGRES_DB=medapi
     volumes:
-      - ./data/postgres:/var/lib/postgresql/data
+      - /data/postgres:/var/lib/postgresql/data
     networks:
       - app-network
 
@@ -45,19 +45,19 @@ services:
       - app-network
     command: -baselineOnMigrate=true migrate
 
-  redis:
-    image: redis:7.2.2
-    container_name: redis-server
-    restart: always
-    environment:
-      - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - "6379:6379"
-    volumes:
-      - ./data/redis:/data
-    networks:
-      - app-network
-
+#  redis:
+#    image: redis:7.2.2
+#    container_name: redis-server
+#    restart: always
+#    environment:
+#      - ALLOW_EMPTY_PASSWORD=yes
+#    ports:
+#      - "6379:6379"
+#    volumes:
+#      - ./data/redis:/data
+#    networks:
+#      - app-network
+#
 networks:
   app-network:
     driver: bridge
