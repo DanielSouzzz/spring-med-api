@@ -1,4 +1,4 @@
-package app.springmedapi.entity;
+package app.springmedapi.infra.security;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,7 +1,6 @@
 package app.springmedapi.infra.security;
 
-import app.springmedapi.entity.Usuario;
-import app.springmedapi.entity.usuarioDTO.DadosAutenticacao;
+import app.springmedapi.infra.security.usuarioDTO.DadosAutenticacao;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

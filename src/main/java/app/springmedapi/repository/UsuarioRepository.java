@@ -1,6 +1,6 @@
 package app.springmedapi.repository;
 
-import app.springmedapi.entity.Usuario;
+import app.springmedapi.infra.security.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package app.springmedapi.service;
+package app.springmedapi.infra.security;
 
 import app.springmedapi.repository.UsuarioRepository;
 import org.springframework.security.core.userdetails.UserDetails;
