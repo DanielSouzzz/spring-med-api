@@ -3,15 +3,17 @@ package app.springmedapi.entity.AgendamentoDTO;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDateTime;
+
 public record AgendamentoResponseDTO(
         Long id,
         @NotNull
         @Future
-        String data,
+        LocalDateTime data,
         @NotNull
-        String medico,
+        Long idMedico,
         @NotNull
-        String paciente,
+        Long idPaciente,
         @NotNull
         String especialidade
 ) {
