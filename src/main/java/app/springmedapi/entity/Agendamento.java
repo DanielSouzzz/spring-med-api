@@ -18,8 +18,8 @@ public class Agendamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String idMedico;
-    private String idPaciente;
+    private Integer idMedico;
+    private Integer idPaciente;
     private String especialidade;
     private LocalDateTime data;
 }
