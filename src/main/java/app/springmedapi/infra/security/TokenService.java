@@ -40,6 +40,9 @@ public class TokenService {
             throw new RuntimeException("Erro ao verificar token jwt", exception);
         }
     }
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
     private Instant expirationDate() {
         return Instant.now().plusSeconds(3600);
     }
