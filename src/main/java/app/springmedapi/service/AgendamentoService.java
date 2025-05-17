@@ -27,7 +27,8 @@ public class AgendamentoService {
 
     @Transactional
     public AgendamentoResponseDTO agendar(AgendamentoRequestDTO agendamentoRequestDTO) {
-        if (!medicoRepository.existsById(agendamentoRequestDTO.idMedico())) {
+        if (agendamentoRequestDTO.idMedico() != null
+                && !medicoRepository.existsById(agendamentoRequestDTO.idMedico())) {
             throw new ValidacaoException("Id do médico informado não existe!");
         }
 
