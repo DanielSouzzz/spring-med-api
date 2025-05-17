@@ -26,17 +26,17 @@ public class AgendamentoService {
     }
 
     @Transactional
-    public AgendamentoResponseDTO agendar(AgendamentoRequestDTO agendamentoRequestDTO) {
-        if (agendamentoRequestDTO.idMedico() != null
-                && !medicoRepository.existsById(agendamentoRequestDTO.idMedico())) {
+    public AgendamentoResponseDTO agendar(AgendamentoRequestDTO dto) {
+        if (dto.idMedico() != null
+                && !medicoRepository.existsById(dto.idMedico())) {
             throw new ValidacaoException("Id do médico informado não existe!");
         }
 
-        if (!pacienteRepository.existsById(agendamentoRequestDTO.idPaciente())){
+        if (!pacienteRepository.existsById(dto.idPaciente())){
             throw new ValidacaoException("Id do paciente informado não existe!");
         }
 
-        Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(agendamentoRequestDTO);
+        Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
         agendamentoEntity = agendamentoRepository.save(agendamentoEntity);
         return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
     }
