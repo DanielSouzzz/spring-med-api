@@ -36,6 +36,12 @@ public class AgendamentoService {
             throw new ValidacaoException("Id do paciente informado não existe!");
         }
 
+        if (dto.idMedico() == null
+                && dto.especialidade() != null){
+            Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
+            agendamentoEntity.setIdMedico(medicoRepository.findRandomDoctor((agendamentoEntity.getEspecialidade())));
+        }
+
         Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
         agendamentoEntity = agendamentoRepository.save(agendamentoEntity);
         return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
