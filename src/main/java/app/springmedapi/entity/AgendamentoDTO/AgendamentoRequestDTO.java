@@ -10,7 +10,6 @@ public record AgendamentoRequestDTO(
         @NotNull
         @Future
         LocalDateTime data,
-        @NotNull
         Long idMedico,
         @NotNull
         Long idPaciente,

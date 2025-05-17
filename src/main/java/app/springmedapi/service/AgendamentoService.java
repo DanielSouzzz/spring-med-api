@@ -40,6 +40,8 @@ public class AgendamentoService {
                 && dto.especialidade() != null){
             Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
             agendamentoEntity.setIdMedico(medicoRepository.findRandomDoctor((agendamentoEntity.getEspecialidade())));
+            agendamentoEntity = agendamentoRepository.save(agendamentoEntity);
+            return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
         }
 
         Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
