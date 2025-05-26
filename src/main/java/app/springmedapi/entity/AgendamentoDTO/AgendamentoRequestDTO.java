@@ -13,7 +13,6 @@ public record AgendamentoRequestDTO(
         Long idMedico,
         @NotNull
         Long idPaciente,
-        @NotNull
         Especialidade especialidade
 ) {
 }

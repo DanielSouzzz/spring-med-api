@@ -14,7 +14,6 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     Page<Medico> findAllByAtivoTrue(Pageable pageable);
 
     @Query(value = """
-
             select id from medicos
        where ativo = true and especialidade = :especialidade
        order by RANDOM()
