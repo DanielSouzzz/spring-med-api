@@ -11,6 +11,5 @@ import org.mapstruct.Mapping;
 
     AgendamentoResponseDTO toAgendamentoDTO(Agendamento agendamentoEntity);
 
-    @Mapping(target = "idMedico", ignore = true)
     Agendamento toAgendamentoEntity(AgendamentoRequestDTO agendamentoRequestDTO);
 }

@@ -3,6 +3,7 @@ package app.springmedapi.service;
 import app.springmedapi.entity.Agendamento;
 import app.springmedapi.entity.AgendamentoDTO.AgendamentoRequestDTO;
 import app.springmedapi.entity.AgendamentoDTO.AgendamentoResponseDTO;
+import app.springmedapi.entity.Medico;
 import app.springmedapi.infra.exception.ValidacaoException;
 import app.springmedapi.mapper.AgendamentoMapper;
 import app.springmedapi.repository.AgendamentoRepository;
@@ -40,6 +41,18 @@ public class AgendamentoService {
                 && dto.especialidade() != null){
             Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
             agendamentoEntity.setIdMedico(medicoRepository.findRandomDoctor((agendamentoEntity.getEspecialidade())));
+            agendamentoEntity = agendamentoRepository.save(agendamentoEntity);
+            return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
+        }
+
+        if (dto.especialidade() == null
+                && dto.idMedico() != null){
+            Medico medico = medicoRepository.findById(dto.idMedico())
+                    .orElseThrow(() -> new ValidacaoException("Médico não encontrado com ID: " + dto.idMedico()));
+            Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
+            System.out.println("teste 1"+agendamentoEntity);
+            agendamentoEntity.setEspecialidade(String.valueOf(medico.getEspecialidade()));
+            System.out.println("teste 2"+agendamentoEntity);
             agendamentoEntity = agendamentoRepository.save(agendamentoEntity);
             return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
         }
