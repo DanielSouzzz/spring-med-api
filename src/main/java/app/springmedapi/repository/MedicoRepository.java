@@ -15,13 +15,13 @@ public interface MedicoRepository extends JpaRepository<Medico, Long> {
     @Query(value = """
             select * from medicos
             where ativo = true
-              and especialidade = 'CARDIOLOGIA'
+              and especialidade = :especialidade
               and id not in (
                 select id_medico from agendamentos where data = :data
               )
             order by RANDOM()
             limit 1
        """, nativeQuery = true)
-    Integer findRandomDoctor(@Param("especialidade") String especialidade, LocalDateTime data);
+    Integer findRandomDoctor(@Param("especialidade") String especialidade,@Param("data") LocalDateTime data);
 
 }

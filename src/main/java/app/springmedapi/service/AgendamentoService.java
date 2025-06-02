@@ -9,7 +9,6 @@ import app.springmedapi.mapper.AgendamentoMapper;
 import app.springmedapi.repository.AgendamentoRepository;
 import app.springmedapi.repository.MedicoRepository;
 import app.springmedapi.repository.PacienteRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
