@@ -9,6 +9,7 @@ import app.springmedapi.mapper.AgendamentoMapper;
 import app.springmedapi.repository.AgendamentoRepository;
 import app.springmedapi.repository.MedicoRepository;
 import app.springmedapi.repository.PacienteRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -40,7 +41,7 @@ public class AgendamentoService {
         if (dto.idMedico() == null
                 && dto.especialidade() != null){
             Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
-            agendamentoEntity.setIdMedico(medicoRepository.findRandomDoctor((agendamentoEntity.getEspecialidade())));
+            agendamentoEntity.setIdMedico(medicoRepository.findRandomDoctor(agendamentoEntity.getEspecialidade(), agendamentoEntity.getData()));
             agendamentoEntity = agendamentoRepository.save(agendamentoEntity);
             return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
         }
