@@ -12,9 +12,9 @@ public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> 
     @Query(value = """
             select exists (
             SELECT 1 FROM agendamentos
-            WHERE medico_id = :idMedico AND data_hora = :data
+            WHERE id_medico = :idMedico AND data = :data
             )
             """, nativeQuery = true)
     boolean hourAvailable(@Param("idMedico") Long idMedico,
-                           @Param("data") LocalDateTime data);
-
+                          @Param("data") LocalDateTime data);
+}

@@ -28,6 +28,9 @@ public class AgendamentoService {
 
     @Transactional
     public AgendamentoResponseDTO agendar(AgendamentoRequestDTO dto) {
+        if (agendamentoRepository.hourAvailable(dto.idMedico(),dto.data())){
+            throw new ValidacaoException("horário ocupado!");
+        }
         if (dto.idMedico() != null
                 && !medicoRepository.existsById(dto.idMedico())) {
             throw new ValidacaoException("Id do médico informado não existe!");
@@ -50,9 +53,7 @@ public class AgendamentoService {
             Medico medico = medicoRepository.findById(dto.idMedico())
                     .orElseThrow(() -> new ValidacaoException("Médico não encontrado com ID: " + dto.idMedico()));
             Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
-            System.out.println("teste 1"+agendamentoEntity);
             agendamentoEntity.setEspecialidade(String.valueOf(medico.getEspecialidade()));
-            System.out.println("teste 2"+agendamentoEntity);
             agendamentoEntity = agendamentoRepository.save(agendamentoEntity);
             return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
         }
