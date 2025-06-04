@@ -8,10 +8,13 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
+
     @Query(value = """
-            select a.data from agendamentos a
-            where a.data = :data
-            and a.id_medico = :id_medico
-       """, nativeQuery = true)
-    Integer findRandomDoctor(@Param("data") LocalDateTime data,@Param("id_medico") String id_medico);
-}
+            select exists (
+            SELECT 1 FROM agendamentos
+            WHERE medico_id = :idMedico AND data_hora = :data
+            )
+            """, nativeQuery = true)
+    boolean hourAvailable(@Param("idMedico") Long idMedico,
+                           @Param("data") LocalDateTime data);
+
