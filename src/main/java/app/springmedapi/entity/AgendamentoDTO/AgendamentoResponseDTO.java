@@ -1,5 +1,6 @@
 package app.springmedapi.entity.AgendamentoDTO;
 
+import app.springmedapi.entity.Agendamento;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 

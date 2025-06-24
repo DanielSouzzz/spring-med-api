@@ -31,6 +31,7 @@ public class AgendamentoService {
         if (agendamentoRepository.hourAvailable(dto.idMedico(),dto.data())){
             throw new ValidacaoException("horário ocupado!");
         }
+
         if (dto.idMedico() != null
                 && !medicoRepository.existsById(dto.idMedico())) {
             throw new ValidacaoException("Id do médico informado não existe!");
