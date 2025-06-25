@@ -9,7 +9,7 @@ CREATE TABLE available_schedule
     id_medico     INT         NOT NULL,
     especialidade VARCHAR(30) NOT NULL,
     available BOOLEAN DEFAULT true,
-    day_of_week VARCHAR(10) NOT NULL,
+    day_of_week day_enum NOT NULL,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
 
