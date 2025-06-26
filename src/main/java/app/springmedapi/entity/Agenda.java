@@ -20,7 +20,6 @@ public class Agenda {
     private Long id;
 
     private Integer idMedico;
-    private Integer idPaciente;
     private String especialidade;
 
     @Enumerated(EnumType.STRING)
