@@ -1,5 +1,5 @@
 ALTER TABLE medicos
-    ADD COLUMN ativo BOOLEAN;
+    ADD COLUMN IF NOT EXISTS ativo BOOLEAN;
 
 ALTER TABLE medicos
     ALTER COLUMN ativo SET DEFAULT true;
