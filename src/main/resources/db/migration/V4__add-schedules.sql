@@ -1,4 +1,4 @@
-CREATE TABLE agendamentos
+CREATE TABLE IF NOT EXISTS agendamentos
 (
     id            SERIAL PRIMARY KEY,
     id_medico     INT         NOT NULL,
