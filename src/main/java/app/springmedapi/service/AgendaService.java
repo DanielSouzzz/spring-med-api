@@ -3,6 +3,7 @@ package app.springmedapi.service;
 import app.springmedapi.entity.Agenda;
 import app.springmedapi.entity.agenda.AgendaRequestDTO;
 import app.springmedapi.entity.agenda.AgendaResponseDTO;
+import app.springmedapi.mapper.AgendaMapper;
 import app.springmedapi.repository.AgendaRepository;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
