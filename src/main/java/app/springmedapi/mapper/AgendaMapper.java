@@ -2,14 +2,18 @@ package app.springmedapi.mapper;
 
 import app.springmedapi.entity.Agenda;
 import app.springmedapi.entity.agenda.AgendaRequestDTO;
+import app.springmedapi.entity.agenda.AgendaResponseDTO;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AgendaMapper {
-    public static AgendaRequestDTO toDTO(Agenda agenda){
+    public static AgendaResponseDTO toDTO(Agenda agenda){
         if (agenda == null){
             return null;
         }
 
-        var dto = new AgendaRequestDTO(
+        var dto = new AgendaResponseDTO(
+                agenda.getId(),
                 agenda.getIdMedico(),
                 agenda.getEspecialidade(),
                 agenda.getDayOfWeek(),

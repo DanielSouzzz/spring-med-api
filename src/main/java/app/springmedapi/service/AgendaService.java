@@ -12,17 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class AgendaService {
     private final AgendaRepository agendaRepository;
-    private final AgendaMapper agendaMapper;
 
-    public AgendaService(AgendaRepository agendaRepository, AgendaMapper agendaMapper) {
+    public AgendaService(AgendaRepository agendaRepository) {
         this.agendaRepository = agendaRepository;
-        this.agendaMapper = agendaMapper;
     }
 
     @Transactional
     public AgendaResponseDTO liberarHorarios(@Valid AgendaRequestDTO dto) {
-        Agenda agendaEntity = agendaMapper.toAgendaEntity(dto);
+        Agenda agendaEntity = AgendaMapper.toEntity(dto);
         agendaEntity = agendaRepository.save(agendaEntity);
-        return agendaMapper.toAgendaDTO(agendaEntity);
+        return AgendaMapper.toDTO(agendaEntity);
     }
 }
