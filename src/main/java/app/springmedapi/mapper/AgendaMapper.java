@@ -2,10 +2,9 @@ package app.springmedapi.mapper;
 
 import app.springmedapi.entity.Agenda;
 import app.springmedapi.entity.agenda.AgendaRequestDTO;
-import app.springmedapi.entity.agenda.AgendaResponseDTO;
 
 public class AgendaMapper {
-    public static AgendaResponseDTO toDTO(Agenda agenda){
+    public static AgendaRequestDTO toDTO(Agenda agenda){
         if (agenda == null){
             return null;
         }
@@ -20,5 +19,19 @@ public class AgendaMapper {
         return dto;
     }
 
-    public static Agenda toEntity(AgendaRequestDTO )
+    public static Agenda toEntity(AgendaRequestDTO dto){
+        if(dto == null){
+            return null;
+        }
+
+        var agenda = new Agenda();
+
+        agenda.setIdMedico(dto.idMedico());
+        agenda.setEspecialidade(dto.especialidade());
+        agenda.setDayOfWeek(dto.dayOfWeek());
+        agenda.setStartTime(dto.startTime());
+        agenda.setEndTime(dto.endTime());
+
+        return agenda;
+    }
 }
