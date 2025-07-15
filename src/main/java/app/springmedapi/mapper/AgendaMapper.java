@@ -31,7 +31,7 @@ public class AgendaMapper {
         var agenda = new Agenda();
 
         agenda.setIdMedico(dto.idMedico());
-        agenda.setEspecialidade(dto.especialidade());
+        agenda.setEspecialidade((dto.especialidade()));
         agenda.setDayOfWeek(dto.dayOfWeek());
         agenda.setStartTime(dto.startTime());
         agenda.setEndTime(dto.endTime());

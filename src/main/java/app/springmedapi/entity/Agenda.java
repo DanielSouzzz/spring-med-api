@@ -1,6 +1,7 @@
 package app.springmedapi.entity;
 
 import app.springmedapi.enums.DayOfWeekEnum;
+import app.springmedapi.enums.Especialidade;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,10 +21,12 @@ public class Agenda {
     private Long id;
 
     private Integer idMedico;
-    private String especialidade;
-
     @Enumerated(EnumType.STRING)
-    @Column(name = "day_of_week", nullable = false)
+    @Column(name = "especialidade")
+    private Especialidade especialidade;
+
+//    @Enumerated(EnumType.STRING)
+//    @Column(name = "day_of_week", columnDefinition = "day_enum")
     private DayOfWeekEnum dayOfWeek;
 
     @Column(name = "start_time", nullable = false)
