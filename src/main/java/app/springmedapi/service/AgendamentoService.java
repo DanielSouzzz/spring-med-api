@@ -12,6 +12,10 @@ import app.springmedapi.repository.PacienteRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Service
 public class AgendamentoService {
     private final AgendamentoRepository agendamentoRepository;
@@ -62,5 +66,15 @@ public class AgendamentoService {
         Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
         agendamentoEntity = agendamentoRepository.save(agendamentoEntity);
         return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
+    }
+
+    public void validarhorarioAntecedencia(AgendamentoRequestDTO dto) {
+        var dataConsulta = dto.data();
+        var agora = LocalDateTime.now();
+        var diferencaEmMinutos = Duration.between(agora, dataConsulta).toMinutes();
+
+        if (diferencaEmMinutos < 30){
+            throw new ValidacaoException("A consulta deve ser agendada com antecedencia mínima de 30 minutos");
+        }
     }
 }
