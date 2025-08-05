@@ -63,6 +63,8 @@ public class AgendamentoService {
             return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
         }
 
+        validarhorarioAntecedencia(dto);
+
         Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
         agendamentoEntity = agendamentoRepository.save(agendamentoEntity);
         return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
