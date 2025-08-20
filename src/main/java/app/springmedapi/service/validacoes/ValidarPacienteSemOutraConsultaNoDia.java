@@ -3,8 +3,10 @@ package app.springmedapi.service.validacoes;
 import app.springmedapi.entity.AgendamentoDTO.AgendamentoRequestDTO;
 import app.springmedapi.infra.exception.ValidacaoException;
 import app.springmedapi.repository.AgendamentoRepository;
+import org.springframework.stereotype.Service;
 
-public class ValidarPacienteSemOutraConsultaNoDia {
+@Service
+public class ValidarPacienteSemOutraConsultaNoDia implements ValidadorAGendamentosConsultas{
     private final AgendamentoRepository agendamentoRepository;
 
     public ValidarPacienteSemOutraConsultaNoDia(AgendamentoRepository agendamentoRepository) {

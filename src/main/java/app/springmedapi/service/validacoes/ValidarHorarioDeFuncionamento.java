@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 
 @Service
-public class ValidarHorarioDeFuncionamento {
+public class ValidarHorarioDeFuncionamento implements ValidadorAGendamentosConsultas{
     public void validar(AgendamentoRequestDTO dto){
         var dataAgendamento = dto.data();
         var isDomingo = dataAgendamento.getDayOfWeek().equals(DayOfWeek.SUNDAY);
