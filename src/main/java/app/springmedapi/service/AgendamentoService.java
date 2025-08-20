@@ -63,20 +63,8 @@ public class AgendamentoService {
             return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
         }
 
-        validarhorarioAntecedencia(dto);
-
         Agendamento agendamentoEntity = agendamentoMapper.toAgendamentoEntity(dto);
         agendamentoEntity = agendamentoRepository.save(agendamentoEntity);
         return agendamentoMapper.toAgendamentoDTO(agendamentoEntity);
-    }
-
-    public void validarhorarioAntecedencia(AgendamentoRequestDTO dto) {
-        var dataConsulta = dto.data();
-        var agora = LocalDateTime.now();
-        var diferencaEmMinutos = Duration.between(agora, dataConsulta).toMinutes();
-
-        if (diferencaEmMinutos < 30){
-            throw new ValidacaoException("A consulta deve ser agendada com antecedencia mínima de 30 minutos");
-        }
     }
 }
