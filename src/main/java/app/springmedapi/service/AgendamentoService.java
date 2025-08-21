@@ -9,12 +9,15 @@ import app.springmedapi.mapper.AgendamentoMapper;
 import app.springmedapi.repository.AgendamentoRepository;
 import app.springmedapi.repository.MedicoRepository;
 import app.springmedapi.repository.PacienteRepository;
+import app.springmedapi.service.validacoes.ValidadorAGendamentosConsultas;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class AgendamentoService {
@@ -22,12 +25,14 @@ public class AgendamentoService {
     private final MedicoRepository medicoRepository;
     private final AgendamentoMapper agendamentoMapper;
     private final PacienteRepository pacienteRepository;
+    private final List<ValidadorAGendamentosConsultas> validadores;
 
-    public AgendamentoService(AgendamentoRepository agendamentoRepository, MedicoRepository medicoRepository, AgendamentoMapper agendamentoMapper, PacienteRepository pacienteRepository) {
+    public AgendamentoService(AgendamentoRepository agendamentoRepository, MedicoRepository medicoRepository, AgendamentoMapper agendamentoMapper, PacienteRepository pacienteRepository, List<ValidadorAGendamentosConsultas> validadores) {
         this.agendamentoRepository = agendamentoRepository;
         this.medicoRepository = medicoRepository;
         this.agendamentoMapper = agendamentoMapper;
         this.pacienteRepository = pacienteRepository;
+        this.validadores = validadores;
     }
 
     @Transactional
@@ -43,6 +48,11 @@ public class AgendamentoService {
 
         if (!pacienteRepository.existsById(dto.idPaciente())){
             throw new ValidacaoException("Id do paciente informado não existe!");
+        }
+
+        for (int i = 0; i<validadores.size(); i++){
+            ValidadorAGendamentosConsultas validador = validadores.get(i);
+            validador.validar(dto);
         }
 
         if (dto.idMedico() == null
