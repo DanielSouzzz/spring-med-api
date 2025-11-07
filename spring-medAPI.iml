@@ -2,19 +2,7 @@
 <module version="4">
   <component name="AdditionalModuleElements">
     <content url="file://$MODULE_DIR$" dumb="true">
-      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test" isTestSource="false" />
     </content>
-  </component>
-  <component name="FacetManager">
-    <facet type="jpa" name="JPA">
-      <configuration>
-        <setting name="validation-enabled" value="true" />
-        <datasource-mapping>
-          <factory-entry name="entityManagerFactory" value="2bb989e5-cc43-46ea-ac6f-62185e8c00ec" />
-        </datasource-mapping>
-        <naming-strategy-map />
-      </configuration>
-    </facet>
   </component>
 </module>

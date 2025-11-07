@@ -10,18 +10,22 @@ import java.time.LocalDateTime;
 
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
     @Query(value = """
-        select 1 from agendamentos a
+    select exists (
+        select 1
+        from agendamentos a
         where a.id_paciente = :idPaciente
         and a.data >= CAST(:data AS DATE)
         and a.data < CAST(:data AS DATE) + INTERVAL '1 day'
+    )
 """, nativeQuery = true)
     boolean isHasScheduleOnDay(@Param("idPaciente") Long idPaciente,
                                @Param("data") LocalDateTime data);
 
+
     @Query(value = """
             select exists (
             SELECT 1 FROM agendamentos
-            WHERE idMedico = :idMedico AND data = :data
+            WHERE id_medico = :idMedico AND data = :data
             )
             """, nativeQuery = true)
     boolean hourAvailable(@Param("idMedico") Long idMedico,
