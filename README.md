@@ -38,7 +38,7 @@ O sistema funciona como uma agenda online que permite cadastrar médicos, pacien
 ## 🚀 Como rodar o projeto
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/spring-med-api.git
+   git clone https://github.com/DanielSouzzz/spring-med-api.git
    ```
 2. Suba os containers (Postgres + Flyway):
    ```bash
